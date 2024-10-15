@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/style.css">
+  <title>Signup</title>
+</head>
+<body>
+  <div class="banner">
+    <div class="navbar">
+      <img src="static/imgs/logo.png" class="logo"> <br> <br>
+      <h1>Wealth Care</h1>
+
+    </div>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          <div class="messages">
+            {% for categories, message in messages %}
+              <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-box" >
+  
+      <!------------------- registration form -------------------------->
+      <div class="register-container" >
+          <div class="top">
+              <span>Have an account? <a href="{{ url_for("signin_page") }}" >Login</a></span>
+              <header>Sign Up</header>
+          </div>
+          <form action="{{ url_for("newuser") }}" method="post" >
+
+            <div class="two-forms">
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Firstname" name="firstname">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Lastname" name="lastname">
+                    <i class="bx bx-user"></i>
+                </div>
+            </div>
+            <div class="two-forms">
+
+              <div class="input-box">
+                  <input type="text" class="input-field" placeholder="Email" name="email">
+                  <i class="bx bx-envelope"></i>
+              </div>
+              <div class="input-box">
+                  <input type="password" class="input-field" placeholder="Password" name="password">
+                  <i class="bx bx-lock-alt"></i>
+              </div>
+            </div>
+            <div class="input-box">
+              <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber">
+              <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="two-forms">
+
+            <div class="input-box">
+              <input type="date" class="input-field" placeholder="Date of birth" name="date_of_birth" >
+              <i class="bx bx-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input type="text" class="input-field" placeholder="Gender" name="gender">
+            <i class="bx bx-lock-alt"></i>
+        </div>
+          </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Register">
+            </div>
+          </form>
+      </div>
+    </div>      
+  </div>
+  
+</body>
+</html>

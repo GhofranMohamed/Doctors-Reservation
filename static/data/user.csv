@@ -1,0 +1,13 @@
+user_id,first_name,last_name,email,password,phone_number,date_of_birth,gender
+1,ghofran,mohamed,ghofranmohamed@gmail.com,12345,012345688,2001-10-30,female
+2,mostafa,ahmed,mostafaahmed@gmail.com,4567,0132456987,2002-10-29,male
+4,belal,mahmoud,belal@gmail.com,1234,01364851,2024-10-16,male
+5,ghofran,ahmed,ahmed@hyml,12356,10246698,2024-10-23,female
+6,ghofran,ahmed,ahmd@hyml,54689,10246698,2024-10-23,female
+7,mostafa,mahmoud,mostafa@net,45678,01236558,2024-10-10,male
+8,mostafa,mahmoud,mostaa@net,569841,01236558,2024-10-10,male
+9,mostafa,mahmoud,mostaa@net,4568,01236558,2024-10-10,male
+10,mostafa,mahmoud,mostaa@net,45325,01236558,2024-10-10,male
+11,mostafa,mahmoud,mostaa@net,486,01236558,2024-10-10,male
+12,mostafa,mahmoud,mostaa@net,5214,01236558,2024-10-10,male
+12,aya,ahmed,ayaahmed@gmail.com,1234,03214668,2024-10-08,female
