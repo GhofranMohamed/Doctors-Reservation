@@ -3,7 +3,7 @@
 const signin = document.getElementById("signin"); 
 const signup = document.getElementById("signup") ;
 const inform = document.getElementById("signinform");
-const upform = document.getElementById("signupform")
+const upform = document.getElementById("signupform");
 const content = document.getElementById("content") ;
 
 /*__________functions_______*/

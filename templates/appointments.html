@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/style.css">
-  <title>Welcome</title>
+  <title>Doctor list</title>
 </head>
 <body>
   <div class="banner"> 
@@ -13,11 +13,10 @@
       <h1>Wealth Care</h1>
 
       <ul>
-        <li><a href="#" class="link active">Home</a></li>
+        <li><a href="{{ url_for("home_page") }}" class="link">Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
-        <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
+        <li><a href="#" class="link active">My appoitments</a></li>
         <li><a href="#" class="link">Contact us</a></li>
-
       </ul>
     </div>
     {% with messages = get_flashed_messages(with_categories=True) %}
@@ -31,15 +30,28 @@
     {% endwith %}
    
    
-    <div class="content" id = "content" >
-      <h2> A health care center you can trust</h2>
-      <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, beatae. Obcaecati atque eum rerum quam
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Doctor name</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment['doctor_name'] }}</td>
+                <td>{{ appointment['date'] }}</td>
+                <td>{{ appointment['time'] }}</td>
+                <td><a href="#">Edit</a></td>
+                <td><a href="{{ url_for('delete_appointment', appointment_id=appointment['appointment_id']) }}">Remove</a></td>
 
-      </h3>
-      
-    </div>
-
-        
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>      
   </div> 
   
 

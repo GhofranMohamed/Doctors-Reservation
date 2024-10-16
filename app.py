@@ -1,26 +1,14 @@
 import flask 
-from flask import request , flash , render_template ,redirect, url_for
+import csv
+from flask import request , flash , render_template ,redirect, url_for, session
 from user import User 
+from appointments import Appointment
+from doctors import Doctor
 
 
 app = flask.Flask("app.py")
 app.secret_key = "secretkey"
 User.initialize_csv()
-
-#_____main funcions_______
-
-def get_html(page_name):
-  html_file = open(page_name + ".html")
-  content = html_file.read()
-  html_file.close()
-  return content 
-
-def get_notes () :
-  notes_list = open("static/notes.txt")
-  content = notes_list.read()
-  notes_list.close()
-  notes = content.split("\n")
-  return notes
 
 #______routes________
 
@@ -39,6 +27,15 @@ def signin_page():
 @app.route("/signup") 
 def signup_page():
   return render_template("signup.html")
+
+@app.route("/reservation") 
+def reservation_page():
+  return render_template("reservation.html")
+
+@app.route("/doctors") 
+def doctors_page():
+  doctors = Doctor.get_all_doctors()
+  return render_template("doctors.html", doctors=doctors)
  
 @app.route("/newuser" , methods=['POST'])
 def newuser():
@@ -74,6 +71,7 @@ def login():
     if check == 1 :
       user = User.login(email, password)
       if user :
+        session["user_id"] = user.user_id
         flash("Welcome "+ user.first_name , "success")
         return redirect(url_for("home_page")) 
     elif check == 0 :
@@ -83,5 +81,57 @@ def login():
       flash("This email doesn't have an account signup first", "error")
       return render_template("signin.html")
 
+@app.route("/reservation", methods=["GET", "POST"])
+def reservation_form():
+
+    if request.method == "POST" :
+      
+      user_id = session.get("user_id")
+      date = request.form["date"]
+      time = request.form["time"]
+      doctor_id = request.form["doctor_id"]
+      phone_number = request.form["phonenumber"]
+      appointment_id = sum(1 for _ in open(Appointment.csv_file))
+      print(request.args)
+
+
+      # get doctor's name using Doctor class
+      doctor_name = Doctor.get_doctor_name(doctor_id)
+      
+      if not doctor_name:
+          flash("Doctor not found.", "error")
+          return redirect(url_for('reservation_form', doctor_id=doctor_id))
+      
+      # Create appointment instance and save it
+      appointment = Appointment(appointment_id, user_id, doctor_id, doctor_name, date, time, phone_number)
+      appointment.save()
+
+      flash(f"Appointment made with Dr. {doctor_name}!", "success")
+      return redirect(url_for('home_page'))
+
+@app.route("/my_appointments")
+def my_appointments():
+  user_id = session.get('user_id') 
+  print(user_id)
+  appointments = Appointment.get_user_appointments(user_id)
+  return render_template("appointments.html", appointments=appointments)
+
+# @app.route("/edit_appointment")
+# def edit_appointment():
+
+@app.route("/delete_appointment", methods = ["GET"])
+def delete_appointment():
+  if request.method == "GET" :
+    appointment_id = request.args.get("appointment_id")
+    user_id = session.get('user_id')
+    print(appointment_id)
+    print(Appointment.delete(appointment_id, user_id))
+    flash("Appointment deleted succesfully", "success")
+  return redirect(url_for('my_appointments'))
+
+
+
+    
+  
 
     
