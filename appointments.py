@@ -44,7 +44,7 @@ class Appointment:
         return appointments    
 
     @staticmethod
-    def update(appointment_id, user_id, new_date, new_time):
+    def edit(appointment_id, user_id, new_date, new_time):
         appointments = []
         with open("static/data/appointments.csv", mode='r') as file:
             csv_reader = csv.DictReader(file)

@@ -13,24 +13,24 @@
       <h1>Wealth Care</h1>
 
       <ul>
-        <li><a href="#" class="link active">Home</a></li>
+        <li><a href="#" class="link active" id="home_link">Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
         <li><a href="#" class="link">Contact us</a></li>
 
       </ul>
     </div>
-    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-          <div class="messages">
-            {% for categories, message in messages %}
+          <div class="flashed" >
+            {% for category, message in messages %}
               <p class="{{ category }}">{{ message }}</p>
             {% endfor %}
           </div>
         {% endif %}
     {% endwith %}
-   
-   
+    
+  
     <div class="content" id = "content" >
       <h2> A health care center you can trust</h2>
       <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, beatae. Obcaecati atque eum rerum quam
@@ -41,10 +41,8 @@
 
         
   </div> 
-  
 
-
-  <script src="static/script.js"></script>
+  <script src="static/home.js"></script>
 
 </body>
 </html>

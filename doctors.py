@@ -20,3 +20,11 @@ class Doctor:
             for row in csv_reader:
                 doctors.append(row)
         return doctors
+    
+    # @classmethod
+    # def doctor_search(cls, text):
+    #     doctors = []
+    #     with open(cls.csv_file, mode="r") as file:
+    #         csv_reader = csv.DictReader(file)
+    #         for row in csv_reader:
+    #             if row.f

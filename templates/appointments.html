@@ -13,16 +13,17 @@
       <h1>Wealth Care</h1>
 
       <ul>
-        <li><a href="{{ url_for("home_page") }}" class="link">Home</a></li>
+        <li><a href="{{ url_for("back_home") }}" class="link" id="home_link">Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="#" class="link active">My appoitments</a></li>
         <li><a href="#" class="link">Contact us</a></li>
       </ul>
     </div>
-    {% with messages = get_flashed_messages(with_categories=True) %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-          <div class="messages">
-            {% for categories, message in messages %}
+          <div class="flashed" >
+            {% for category, message in messages %}
               <p class="{{ category }}">{{ message }}</p>
             {% endfor %}
           </div>
@@ -31,30 +32,31 @@
    
    
     
-    <table>
-        <thead>
-            <tr>
-                <th>Doctor name</th>
-                <th>Date</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for appointment in appointments %}
-            <tr>
-                <td>{{ appointment['doctor_name'] }}</td>
-                <td>{{ appointment['date'] }}</td>
-                <td>{{ appointment['time'] }}</td>
-                <td><a href="#">Edit</a></td>
-                <td><a href="{{ url_for('delete_appointment', appointment_id=appointment['appointment_id']) }}">Remove</a></td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>      
+      <table class="appointments">
+          <thead>
+              <tr>
+                  <th>Doctor name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for appointment in appointments %}
+              <tr>
+                  <td>{{ appointment['doctor_name'] }}</td>
+                  <td>{{ appointment['date'] }}</td>
+                  <td>{{ appointment['time'] }}</td>
+                  <td><a href="{{ url_for('edit_page', appointment_id=appointment['appointment_id']) }}" class="table_text">Edit</a></td>
+                  <td><a href="{{ url_for('delete_appointment', appointment_id=appointment['appointment_id']) }}" class="table_text">Remove</a></td>
+  
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>      
   </div> 
   
-
 
   <script src="static/script.js"></script>
 
