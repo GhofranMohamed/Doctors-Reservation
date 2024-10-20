@@ -41,20 +41,33 @@
             
             <div class="input-box">
               <input hidden type="number" class="input-field" name="appointment_id" value="{{ request.args.get('appointment_id') }}">
+              <input hidden type="number" class="input-field" name="doctor_id" value="{{ request.args.get('doctor_id') }}">
               
               <i class="bx bx-lock-alt"></i>
           
-          <div class="two-forms">
+              <div class="two-options">
 
-            <div class="input-box">
-              <input type="date" class="input-field" placeholder="Date " name="date" >
-              <i class="bx bx-lock-alt"></i>
-          </div>
-          <div class="input-box">
-            <input type="time" class="input-field" placeholder="Time" name="time">
-            <i class="bx bx-lock-alt"></i>
-        </div>
-          </div>
+                <div class="input-box">
+                  
+                  <select name="date" id="date" class="input-field" required>
+                    <option value="" class="options">Select a date</option>
+                    {% for date in doctor['available_dates'] %}
+                      <option value="{{ date }}" class="options">{{ date }}</option>
+                    {% endfor %}
+                  </select>
+                  <i class="bx bx-lock-alt"></i>
+                </div>
+    
+                <div class="input-box">
+                  <select name="slot" id="slot" class="input-field" required>
+                    <option value="" class="options">Select a slot</option>
+                    {% for slot in doctor['available_slots'] %}
+                      <option value="{{ slot }}" class="options">{{ slot }}</option>
+                    {% endfor %}
+                  </select>
+                  <i class="bx bx-lock-alt"></i>
+                </div>
+              </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Edit">
             </div>

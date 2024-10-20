@@ -14,7 +14,15 @@ class User:
         self.date_of_birth = date_of_birth
         self.gender = gender
 
-#__________________functions_______________#        
+#__________________functions_______________#  
+
+    def save(self):
+        self.initialize_csv()
+        with open(self.csv_file, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([self.user_id, self.first_name, self.last_name, self.email, self.password, self.phone_number, self.date_of_birth, self.gender])  
+
+
     @classmethod
     def initialize_csv(cls):
         if not os.path.exists(cls.csv_file):

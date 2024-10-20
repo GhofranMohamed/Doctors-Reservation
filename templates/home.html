@@ -17,6 +17,7 @@
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
         <li><a href="#" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("logout") }}"" class="button" id="logoutbutton">Logout</a></li>
 
       </ul>
     </div>
@@ -38,6 +39,15 @@
       </h3>
       
     </div>
+    <form action="{{ url_for("doctor_search") }}" method="post" >
+      <div class="form-box" >
+        <div class="search">
+          <input type="text" class="input-field" placeholder="Search for a doctor" name="search">
+          <input type="submit" class="submit" value="Search">
+          <i class="bx bx-lock-alt"></i>
+        </div>
+      </div>
+    </form>
 
         
   </div> 

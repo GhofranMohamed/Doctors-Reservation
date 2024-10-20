@@ -25,8 +25,12 @@ def home_page():
 def back_home():
   if request.method == "GET":
     user_name = request.args.get("user_name")
-    flash ("Welcome back " + user_name , "success")
-  return render_template("home.html")
+    if user_name != "null" :
+      flash ("Welcome back " + user_name , "success")
+      return render_template("home.html")
+    else :
+      flash ("You must log in first", "error")
+      return redirect(url_for("signin_page")) 
 
 @app.route("/signin") 
 def signin_page():
@@ -38,16 +42,29 @@ def signup_page():
 
 @app.route("/reservation") 
 def reservation_page():
-  return render_template("reservation.html")
+  if request.method == "GET" :
+    doctor_id = request.args.get("doctor_id")
+    doctor = Doctor.get_doctor_by_id(doctor_id)
+    print(doctor)
+    return render_template("reservation.html" , doctor=doctor)
 
 @app.route("/edit") 
 def edit_page():
-  return render_template("edit.html")
+  if request.method == "GET" :
+    doctor_id = request.args.get("doctor_id")
+    doctor = Doctor.get_doctor_by_id(doctor_id)
+  return render_template("edit.html" , doctor = doctor)
 
 @app.route("/doctors") 
 def doctors_page():
   doctors = Doctor.get_all_doctors()
   return render_template("doctors.html", doctors=doctors)
+
+@app.route("/logout")
+def logout():
+  session.clear()
+  flash("You are succuessfully loged out " , "success")
+  return redirect(url_for("welcome_page"))
  
 @app.route("/newuser" , methods=['POST'])
 def newuser():
@@ -83,6 +100,7 @@ def login():
       if user :
         session["user_id"] = user.user_id   #store name and ID to use later 
         session["user_name"] = user.first_name
+        print(user)
         flash("Welcome "+ user.first_name , category="success")
         return redirect(url_for("home_page", user_name = user.first_name))
         
@@ -98,23 +116,29 @@ def reservation_form():
 
     if request.method == "POST" :
       
-      user_id = session.get("u""ser_id")
+      user_id = session.get("user_id")
       user_name = session.get("user_name")
       date = request.form["date"]
-      time = request.form["time"]
+      slot = request.form["slot"]
       doctor_id = request.form["doctor_id"]
       phone_number = request.form["phonenumber"]
       appointment_id = sum(1 for _ in open(Appointment.csv_file)) #counts rows of csv file to assign appointment ID 
-    
+      doctor = Doctor.get_doctor_by_id(doctor_id)
+      available = Appointment.availability(doctor_id, date, slot)
+      doctor_name = doctor["name"]
+
+      print(available)
       # get doctor's name using Doctor class
-      doctor_name = Doctor.get_doctor_name(doctor_id)
+      if available == -1 :
+        flash("This time slot is not available", "error")
+        return render_template("reservation.html" ,  doctor=doctor)
       
       if not doctor_name:
           flash("Doctor not found.", "error")
           return redirect(url_for('reservation_form', doctor_id=doctor_id))
       
       # Create appointment instance and save it
-      appointment = Appointment(appointment_id, user_id, doctor_id, doctor_name, date, time, phone_number)
+      appointment = Appointment(appointment_id, user_id, doctor_id, doctor_name, date, slot, phone_number)
       appointment.save()
 
       flash(f"Appointment made with Dr. {doctor_name}!", category="success")
@@ -124,6 +148,9 @@ def reservation_form():
 def my_appointments():
   user_id = session.get('user_id') 
   appointments = Appointment.get_user_appointments(user_id)
+  if appointments == -1 :
+    flash("You don't have any appointments yet", "error")
+    return render_template("appointments.html")
   return render_template("appointments.html", appointments=appointments)
 
 @app.route("/delete_appointment", methods = ["GET"])
@@ -141,10 +168,31 @@ def edit_appointment():
     user_id = session.get("user_id")
     appointment_id = request.form["appointment_id"]
     new_date = request.form["date"]
-    new_time= request.form["time"]
-    Appointment.edit(appointment_id, user_id, new_date, new_time)
-    flash("Appointment edited succesfully", category="success")
+    new_slot= request.form["slot"]
+    doctor_id = request.form["doctor_id"]
+    
+
+    available = Appointment.availability(doctor_id, new_date, new_slot)
+
+    if available == -1 :
+      flash("This time slot is not available", "error")
+      return redirect(url_for("edit_page" , doctor_id = doctor_id , appointment_id = appointment_id))
+    
+    Appointment.edit(appointment_id, user_id, new_date, new_slot)
+    flash("Appointment edited succesfully", "success")
   return redirect(url_for("my_appointments"))  
+
+@app.route("/doctor_search", methods = ["POST"])
+def doctor_search():
+  if request.method == "POST" :
+    user_name = session.get("user_name")
+    text = request.form["search"]
+    doctors = Doctor.search(text)
+    if doctors == -1 :
+      flash("No doctors found", "error")
+      print(doctors)
+      return  redirect(url_for("home_page" , user_name = user_name))
+  return render_template("doctors.html", doctors=doctors)  
 
 
     

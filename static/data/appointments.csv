@@ -1,7 +1,5 @@
-appointment_id,user_id,doctor_id,doctor_name,date,time,phone_number
-4,1,7,Brandi Clark,2024-10-29,05:00,233365
+appointment_id,user_id,doctor_id,doctor_name,date,slot,phone_number
 4,12,10,Dawn Powell,2024-10-29,18:30,5468123
-4,1,3,Patricia Hull,2024-10-29,05:00,325
 5,1,5,Amber Jackson,2024-10-26,05:50,659851
 6,1,7,Brandi Clark,2024-10-25,02:30,123465897
 7,1,2,Mrs. Melissa Harris,2024-10-26,06:20,123465897
@@ -20,3 +18,12 @@ appointment_id,user_id,doctor_id,doctor_name,date,time,phone_number
 19,2,1,Ashley Juarez,,,
 20,2,10,Dawn Powell,,,
 21,13,10,Dawn Powell,2024-10-24,10:02,985210
+22,1,1,Ashley Juarez,2024-10-17,05:05,012556478
+21,1,4,Austin Decker,2024-10-17,05:05,655
+22,1,2,Mrs. Melissa Harris,2024-10-17,11:00,0132456987
+23,1,4,Austin Decker,2024-10-18,11:00,659851
+24,1,2,Mrs. Melissa Harris,2024-10-18,11:00,659851
+25,1,1,Ashley Juarez,2024-10-17,09:00,123465897
+26,2,4,Austin Decker,2024-10-18,09:00,123465897
+27,1,5,Amber Jackson,2024-10-17,14:00,012556478
+29,14,5,Amber Jackson,2024-10-18,09:00,123465897

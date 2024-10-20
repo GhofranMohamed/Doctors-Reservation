@@ -37,31 +37,36 @@
               <span>Have an account? <a href="{{ url_for("signin_page") }}" >Login</a></span>
               <header>Sign Up</header>
           </div>
-          <form action="{{ url_for("newuser") }}" method="post" >
+          <form action="{{ url_for("newuser") }}" method="post" id="form">
 
             <div class="two-forms">
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Firstname" name="firstname">
+                    <input type="text" class="input-field" placeholder="First name" name="firstname" id="first_name">
+                    <span id="firstname-error" class="error-message"></span>
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Lastname" name="lastname">
+                    <input type="text" class="input-field" placeholder="Last name" name="lastname" id="last_name">
+                    <span id="lastname-error" class="error-message"></span>
                     <i class="bx bx-user"></i>
                 </div>
             </div>
             <div class="two-forms">
 
               <div class="input-box">
-                  <input type="text" class="input-field" placeholder="Email" name="email">
+                  <input type="text" class="input-field" placeholder="Email" name="email" id="email">
+                  <span id="email-error" class="error-message"></span>
                   <i class="bx bx-envelope"></i>
               </div>
               <div class="input-box">
-                  <input type="password" class="input-field" placeholder="Password" name="password">
+                  <input type="password" class="input-field" placeholder="Password" name="password" id="password">
+                  <span id="password-error" class="error-message"></span>
                   <i class="bx bx-lock-alt"></i>
               </div>
             </div>
             <div class="input-box">
-              <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber">
+              <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber" id="phone_number">
+              <span id="phonenumber-error" class="error-message"></span>
               <i class="bx bx-lock-alt"></i>
           </div>
           <div class="two-forms">
@@ -71,17 +76,24 @@
               <i class="bx bx-lock-alt"></i>
           </div>
           <div class="input-box">
-            <input type="text" class="input-field" placeholder="Gender" name="gender">
-            <i class="bx bx-lock-alt"></i>
+                                              
+              <select name="gender" id="gender" class="input-field">
+                <option value="">Select Gender </option>
+                <option value="Male" class="options">Male</option>
+                <option value="Female" class="options">Female</option>
+            </select>
+              <i class="bx bx-lock-alt"></i>
+             
         </div>
           </div>
             <div class="input-box">
-                <input type="submit" class="submit" value="Register">
+                <input type="submit" class="submit" value="Register" id="submit">
             </div>
           </form>
       </div>
     </div>      
   </div>
+  <script src="static/validation.js"></script>
   
 </body>
 </html>
