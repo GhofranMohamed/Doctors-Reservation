@@ -4,6 +4,7 @@ from flask import request , flash , render_template ,redirect, url_for, session
 from user import User 
 from appointments import Appointment
 from doctors import Doctor
+import json
 
 
 app = flask.Flask("app.py")
@@ -43,10 +44,16 @@ def signup_page():
 @app.route("/reservation") 
 def reservation_page():
   if request.method == "GET" :
+    #json.dump convert to json string
     doctor_id = request.args.get("doctor_id")
     doctor = Doctor.get_doctor_by_id(doctor_id)
-    print(doctor)
-    return render_template("reservation.html" , doctor=doctor)
+    available_slots = json.dumps(doctor["available_slots"])
+
+    
+    appointments = Appointment.get_doctor_appointments(doctor_id)
+    appointments = json.dumps(appointments)
+  
+    return render_template("reservation.html" , doctor=doctor , appointments = appointments , available_slots = available_slots)
 
 @app.route("/edit") 
 def edit_page():
@@ -66,7 +73,7 @@ def logout():
   flash("You are succuessfully loged out " , "success")
   return redirect(url_for("welcome_page"))
  
-@app.route("/newuser" , methods=['POST'])
+@app.route("/newuser" , methods=["POST"])
 def newuser():
   if request.method == "POST" :
     first_name = request.form["firstname"]
@@ -89,14 +96,16 @@ def newuser():
  
   
 
-@app.route("/login" , methods = ['POST']) 
+@app.route("/login" , methods = ["POST"]) 
 def login():
   if request.method == "POST" :
     email = request.form["useremail"]
     password = request.form["userpassword"]
     check = User.user_validation(email, password)
+
     if check == 1 :
       user = User.login(email, password)
+      
       if user :
         session["user_id"] = user.user_id   #store name and ID to use later 
         session["user_name"] = user.first_name
@@ -124,18 +133,8 @@ def reservation_form():
       phone_number = request.form["phonenumber"]
       appointment_id = sum(1 for _ in open(Appointment.csv_file)) #counts rows of csv file to assign appointment ID 
       doctor = Doctor.get_doctor_by_id(doctor_id)
-      available = Appointment.availability(doctor_id, date, slot)
       doctor_name = doctor["name"]
-
-      print(available)
-      # get doctor's name using Doctor class
-      if available == -1 :
-        flash("This time slot is not available", "error")
-        return render_template("reservation.html" ,  doctor=doctor)
       
-      if not doctor_name:
-          flash("Doctor not found.", "error")
-          return redirect(url_for('reservation_form', doctor_id=doctor_id))
       
       # Create appointment instance and save it
       appointment = Appointment(appointment_id, user_id, doctor_id, doctor_name, date, slot, phone_number)
@@ -146,21 +145,23 @@ def reservation_form():
 
 @app.route("/my_appointments")
 def my_appointments():
-  user_id = session.get('user_id') 
+  user_id = session.get("user_id") 
   appointments = Appointment.get_user_appointments(user_id)
+
   if appointments == -1 :
     flash("You don't have any appointments yet", "error")
     return render_template("appointments.html")
+  
   return render_template("appointments.html", appointments=appointments)
 
 @app.route("/delete_appointment", methods = ["GET"])
 def delete_appointment():
   if request.method == "GET" :
     appointment_id = request.args.get("appointment_id")
-    user_id = session.get('user_id')
+    user_id = session.get("user_id")
     Appointment.delete(appointment_id, user_id)
     flash("Appointment deleted succesfully", "success")
-  return redirect(url_for('my_appointments'))
+    return redirect(url_for("my_appointments"))
 
 @app.route("/edit_appointment", methods = ["POST"])
 def edit_appointment():
@@ -169,17 +170,9 @@ def edit_appointment():
     appointment_id = request.form["appointment_id"]
     new_date = request.form["date"]
     new_slot= request.form["slot"]
-    doctor_id = request.form["doctor_id"]
     
-
-    available = Appointment.availability(doctor_id, new_date, new_slot)
-
-    if available == -1 :
-      flash("This time slot is not available", "error")
-      return redirect(url_for("edit_page" , doctor_id = doctor_id , appointment_id = appointment_id))
-    
-    Appointment.edit(appointment_id, user_id, new_date, new_slot)
-    flash("Appointment edited succesfully", "success")
+  Appointment.edit(appointment_id, user_id, new_date, new_slot)
+  flash("Appointment edited succesfully", "success")
   return redirect(url_for("my_appointments"))  
 
 @app.route("/doctor_search", methods = ["POST"])
@@ -188,10 +181,11 @@ def doctor_search():
     user_name = session.get("user_name")
     text = request.form["search"]
     doctors = Doctor.search(text)
+
     if doctors == -1 :
       flash("No doctors found", "error")
-      print(doctors)
       return  redirect(url_for("home_page" , user_name = user_name))
+    
   return render_template("doctors.html", doctors=doctors)  
 
 

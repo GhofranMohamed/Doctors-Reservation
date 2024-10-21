@@ -39,11 +39,12 @@
       </h3>
       
     </div>
-    <form action="{{ url_for("doctor_search") }}" method="post" >
+    <form action="{{ url_for("doctor_search") }}" method="post" id="form">
       <div class="form-box" >
         <div class="search">
-          <input type="text" class="input-field" placeholder="Search for a doctor" name="search">
+          <input type="text" class="input-field" placeholder="Search for a doctor name or specialization" name="search" id="search">
           <input type="submit" class="submit" value="Search">
+          <span id="search-error" class="error-message"></span>
           <i class="bx bx-lock-alt"></i>
         </div>
       </div>
@@ -53,6 +54,7 @@
   </div> 
 
   <script src="static/home.js"></script>
+  <script src="static/searchvalidation.js"></script>
 
 </body>
 </html>

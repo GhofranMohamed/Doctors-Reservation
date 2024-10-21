@@ -18,7 +18,7 @@ class User:
 
     def save(self):
         self.initialize_csv()
-        with open(self.csv_file, mode='a', newline='') as file:
+        with open(self.csv_file, mode="a", newline="") as file:
             writer = csv.writer(file)
             writer.writerow([self.user_id, self.first_name, self.last_name, self.email, self.password, self.phone_number, self.date_of_birth, self.gender])  
 
@@ -26,12 +26,12 @@ class User:
     @classmethod
     def initialize_csv(cls):
         if not os.path.exists(cls.csv_file):
-            with open(cls.csv_file, mode='w', newline='') as file:
+            with open(cls.csv_file, mode="w", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(['user_id', 'first_name', 'last_name', 'email', 'password', 'phone_number', 'date_of_birth', 'gender'])
+                writer.writerow(["user_id", "first_name", "last_name", "email", "password", "phone_number", "date_of_birth", "gender"])
 
     def signup(self):
-        with open(self.csv_file, mode='a', newline='') as file:
+        with open(self.csv_file, mode="a", newline="") as file:
             writer = csv.writer(file)
             writer.writerow([self.user_id,
                               self.first_name,
@@ -43,9 +43,9 @@ class User:
                                             self.gender])
           
 
-    @classmethod
+    @classmethod  #think about this function
     def login(cls, email, password):
-        with open(cls.csv_file, mode='r') as file:
+        with open(cls.csv_file, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
                 if row["email"] == email and str(row["password"]) == str(password):
@@ -54,11 +54,11 @@ class User:
         return None
     @classmethod
     def user_validation (cls,  email , password) :
-        with open(cls.csv_file, mode='r') as file:
+        with open(cls.csv_file, mode="r") as file:
           csv_reader = csv.DictReader(file)
           for row in csv_reader:
-            if row['email'] == email :
-              if str(row['password']) ==str( password) :
+            if row["email"] == email :
+              if str(row["password"]) ==str( password) :
                   return 1 
               return 0 
           return -1 

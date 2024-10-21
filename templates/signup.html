@@ -72,8 +72,9 @@
           <div class="two-forms">
 
             <div class="input-box">
-              <input type="date" class="input-field" placeholder="Date of birth" name="date_of_birth" >
-              <i class="bx bx-lock-alt"></i>
+              <input type="date" class="input-field" placeholder="Date of birth" name="date_of_birth" id="date_of_birth">
+              <span id="dob-error" class="error-message"></span>
+              <i class="bx bx-lock-alt"></i> 
           </div>
           <div class="input-box">
                                               
@@ -87,13 +88,13 @@
         </div>
           </div>
             <div class="input-box">
-                <input type="submit" class="submit" value="Register" id="submit">
+                <input type="submit" class="submit" value="Register" id="signup">
             </div>
           </form>
       </div>
     </div>      
   </div>
-  <script src="static/validation.js"></script>
+  <script src="static/signupvalidation.js"></script>
   
 </body>
 </html>

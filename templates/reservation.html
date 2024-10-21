@@ -37,39 +37,42 @@
               
               <header>Book your appointment</header>
           </div>
-          <form action="{{ url_for("reservation_form") }}" method="post" >
+          <form action="{{ url_for("reservation_form") }}" method="post" id="form">
             
             <div class="input-box">
               <input hidden type="number" class="input-field" placeholder="Doctor Id" name="doctor_id" value="{{ doctor['doctor_id'] }}">
+              <input hidden type="n" class="input-field" placeholder="Doctor Id" id="available_slots" value="{{ available_slots }}">
+              <input hidden type="" class="input-field" placeholder="Doctor Id" id ="appointments" value="{{ appointments }}">
               
               <i class="bx bx-lock-alt"></i>
           </div>
             <div class="input-box">
-              <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber">
+              <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber" id="phone_number">
+              <span id="phonenumber-error" class="error-message"></span>
               <i class="bx bx-lock-alt"></i>
           </div>
-          <div class="two-options">
-
-            <div class="input-box">
-              
-          <select name="date" id="date" class="input-field" required>
-            <option value="" class="options">Select a date</option>
-            {% for date in doctor['available_dates'] %}
-              <option value="{{ date }}" class="options">{{ date }}</option>
-            {% endfor %}
-          </select>
-              <i class="bx bx-lock-alt"></i>
-          </div>
-
           <div class="input-box">
+            <input type="date" id="appointment-date" class="input-field" name="date" required >
+          </div>
+          <div class="input-box">
+            <select name="slot" id="slot" class="input-field" name="slot" required >
+              <option value="">Select a slot</option>
+            </select>
+          </div>
+          
+         
+        
+      
+
+          <!-- <div class="input-box">
             <select name="slot" id="slot" class="input-field" required>
               <option value="" class="options">Select a slot</option>
-              {% for slot in doctor['available_slots'] %}
+              {% for slot in doctor['slot'] %}
                 <option value="{{ slot }}" class="options">{{ slot }}</option>
               {% endfor %}
             </select>
             <i class="bx bx-lock-alt"></i>
-        </div>
+        </div> -->
           </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Book">
@@ -82,6 +85,8 @@
 
 
   <script src="static/script.js"></script>
+  <script src="static/reservevalidation.js"></script>
+  <script src="static/availability.js"></script>
 
 </body>
 </html>
