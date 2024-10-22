@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/style.css">
-  <title>Welcome</title>
+  <title>Edit appointment</title>
 </head>
 <body>
   <div class="banner"> 
@@ -16,7 +16,8 @@
         <li><a href="{{ url_for("back_home") }}" class="link" id="home_link">Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
-        <li><a href="#" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("contact_us") }}" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("logout") }}"" class="button" id="logoutbutton">Logout</a></li>
 
       </ul>
     </div>
@@ -40,34 +41,23 @@
           <form action="{{ url_for("edit_appointment") }}" method="post" >
             
             <div class="input-box">
-              <input hidden type="number" class="input-field" name="appointment_id" value="{{ request.args.get('appointment_id') }}">
-              <input hidden type="number" class="input-field" name="doctor_id" value="{{ request.args.get('doctor_id') }}">
-              
-              <i class="bx bx-lock-alt"></i>
+              <input hidden type=""  id="doctor_id" name="doctor_id" value="{{ doctor_id }}">
+              <input hidden type=""  id="appointment_id" name="appointment_id" value="{{ appointment_id }}">
+              <input hidden type=""  id="available_slots" value="{{ available_slots }}">
+              <input hidden type=""  id ="appointments" value="{{ appointments }}">
+            </div>
           
               <div class="two-options">
 
+                
                 <div class="input-box">
-                  
-                  <select name="date" id="date" class="input-field" required>
-                    <option value="" class="options">Select a date</option>
-                    {% for date in doctor['available_dates'] %}
-                      <option value="{{ date }}" class="options">{{ date }}</option>
-                    {% endfor %}
-                  </select>
-                  <i class="bx bx-lock-alt"></i>
+                  <input type="date" id="appointment-date" class="input-field" name="date" min="" required >
                 </div>
-    
                 <div class="input-box">
-                  <select name="slot" id="slot" class="input-field" required>
-                    <option value="" class="options">Select a slot</option>
-                    {% for slot in doctor['available_slots'] %}
-                      <option value="{{ slot }}" class="options">{{ slot }}</option>
-                    {% endfor %}
+                  <select name="slot" id="slot" class="input-field" name="slot" required >
+                    <option value="">Select a slot</option>
                   </select>
-                  <i class="bx bx-lock-alt"></i>
                 </div>
-              </div>
             <div class="input-box">
                 <input type="submit" class="submit" value="Edit">
             </div>
@@ -78,7 +68,8 @@
   
 
 
-  <script src="static/script.js"></script>
+  <script src="static/logout.js"></script>
+  <script src="static/availability.js"></script>
 
 </body>
 </html>

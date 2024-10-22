@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/style.css">
+  <title>Contact us</title>
+</head>
+<body>
+  <div class="banner"> 
+    <div class="navbar">
+      <img src="static/imgs/logo.png" class="logo"> <br> <br>
+      <h1>Wealth Care</h1>
+
+      <ul>
+        <li><a href="{{ url_for("back_home") }}" class="link" id="home_link">Home</a></li>
+        <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
+        <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
+        <li><a href="{{ url_for("contact_us") }}" class="link active">Contact us</a></li>
+        <li><a href="{{ url_for("logout") }}"" class="button" id="logoutbutton">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="contactsinfo">
+      <div class="box">
+        <div class="icon"></div>
+        <div class="address">
+
+          <h3>Address</h3>
+          <p>1115 E Center St, <br> Madisonville, Kentucky,<br> 42431 </p>
+        </div>
+
+      </div>
+      <div class="box">
+        <div class="icon"></div>
+        <div class="address">
+
+          <h3>Phone</h3>
+          <p>(270) 821-9817 </p>
+        </div>
+
+      </div>
+      <div class="box">
+        <div class="icon"></div>
+        <div class="address">
+
+          <h3>Email</h3>
+          <p>wealthcare.org@gmail </p>
+        </div>
+
+      </div>
+
+    </div>
+  <div class="form-box">
+    <div class="register-container"> 
+      <div class="top">
+        <h2> Send Messages</h2>
+      </div> 
+          <form>
+            <div class="two-forms">
+              <div class="input-box">
+                <input type="text" name="" required="required" class="input-field" placeholder="Enter your full name">
+                <i class="bx bx-user"></i>
+              </div>
+              <div class="input-box">
+                <input type="text" name="" required="required" class="input-field" placeholder="Enter your email">
+                <i class="bx bx-user"></i>
+              </div>
+            </div>
+            <div class="input-box">
+              <textarea required="required" class="input-field" placeholder="Type your message here.."></textarea>
+              <i class="bx bx-user"></i>
+            </div>
+            <div class="input-box">
+              <input type="submit" name="" value="send" class="input-field">
+              <i class="bx bx-user"></i>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  
+</body>
+</html>

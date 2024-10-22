@@ -1,3 +1,10 @@
+const loginbutton = document.getElementById("login");
+
+if (loginbutton) {
+
+  loginbutton.addEventListener("click" , () => localStorage.removeItem("is_logged_out"))
+}
+
 function validateForm(event) {
   event.preventDefault(); //prevent form auto submission before validation
 

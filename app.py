@@ -26,6 +26,7 @@ def home_page():
 def back_home():
   if request.method == "GET":
     user_name = request.args.get("user_name")
+    print(user_name)
     if user_name != "null" :
       flash ("Welcome back " + user_name , "success")
       return render_template("home.html")
@@ -41,7 +42,7 @@ def signin_page():
 def signup_page():
   return render_template("signup.html")
 
-@app.route("/reservation") 
+@app.route("/reservation" , methods = ["GET"]) 
 def reservation_page():
   if request.method == "GET" :
     #json.dump convert to json string
@@ -53,14 +54,21 @@ def reservation_page():
     appointments = Appointment.get_doctor_appointments(doctor_id)
     appointments = json.dumps(appointments)
   
-    return render_template("reservation.html" , doctor=doctor , appointments = appointments , available_slots = available_slots)
+    return render_template("reservation.html" , doctor_id = doctor_id,  appointments = appointments , available_slots = available_slots)
 
 @app.route("/edit") 
 def edit_page():
   if request.method == "GET" :
+    #json.dump convert to json string
     doctor_id = request.args.get("doctor_id")
     doctor = Doctor.get_doctor_by_id(doctor_id)
-  return render_template("edit.html" , doctor = doctor)
+
+    available_slots = json.dumps(doctor["available_slots"])
+
+    appointments = Appointment.get_doctor_appointments(doctor_id)
+    appointments = json.dumps(appointments)
+
+  return render_template("edit.html", appointments = appointments , available_slots = available_slots)
 
 @app.route("/doctors") 
 def doctors_page():
@@ -72,6 +80,10 @@ def logout():
   session.clear()
   flash("You are succuessfully loged out " , "success")
   return redirect(url_for("welcome_page"))
+
+@app.route("/contact_us")
+def contact_us():
+  return render_template("contact.html")
  
 @app.route("/newuser" , methods=["POST"])
 def newuser():
@@ -131,6 +143,7 @@ def reservation_form():
       slot = request.form["slot"]
       doctor_id = request.form["doctor_id"]
       phone_number = request.form["phonenumber"]
+      print(doctor_id)
       appointment_id = sum(1 for _ in open(Appointment.csv_file)) #counts rows of csv file to assign appointment ID 
       doctor = Doctor.get_doctor_by_id(doctor_id)
       doctor_name = doctor["name"]
@@ -159,7 +172,8 @@ def delete_appointment():
   if request.method == "GET" :
     appointment_id = request.args.get("appointment_id")
     user_id = session.get("user_id")
-    Appointment.delete(appointment_id, user_id)
+    doctor_id = request.args.get("doctor_id")
+    Appointment.delete(appointment_id, user_id , doctor_id)
     flash("Appointment deleted succesfully", "success")
     return redirect(url_for("my_appointments"))
 
@@ -168,10 +182,11 @@ def edit_appointment():
   if request.method == "POST" :
     user_id = session.get("user_id")
     appointment_id = request.form["appointment_id"]
+    doctor_id = request.form["doctor_id"]
     new_date = request.form["date"]
     new_slot= request.form["slot"]
     
-  Appointment.edit(appointment_id, user_id, new_date, new_slot)
+  Appointment.edit(appointment_id, user_id, doctor_id, new_date, new_slot)
   flash("Appointment edited succesfully", "success")
   return redirect(url_for("my_appointments"))  
 

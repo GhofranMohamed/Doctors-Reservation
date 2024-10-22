@@ -51,12 +51,12 @@ class Appointment:
             return appointments    
     
     @classmethod
-    def delete(cls,appointment_id, user_id):
+    def delete(cls,appointment_id, user_id , doctor_id):
         appointments = []
         with open( cls.csv_file, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
-                if row["appointment_id"] != appointment_id or row["user_id"] != user_id:
+                if row["appointment_id"] != appointment_id or row["user_id"] != user_id or row["doctor_id"] != doctor_id:
                     appointments.append(row)
 
         with open("static/data/appointments.csv", mode="w", newline="") as file:
@@ -66,12 +66,12 @@ class Appointment:
         return appointments    
 
     @classmethod
-    def edit(cls,appointment_id, user_id, new_date, new_slot):
+    def edit(cls,appointment_id, user_id, doctor_id , new_date, new_slot):
         appointments = []
         with open(cls.csv_file, mode="r") as file:
             csv_reader = csv.DictReader(file)
             for row in csv_reader:
-                if row["appointment_id"] == appointment_id and row["user_id"] == user_id:
+                if row["appointment_id"] == appointment_id and row["user_id"] == user_id and row["doctor_id"] == doctor_id:
                     row["date"] = new_date
                     row["slot"] = new_slot
                 appointments.append(row)

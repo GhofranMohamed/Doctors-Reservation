@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/style.css">
-  <title>Welcome</title>
+  <title>Home</title>
 </head>
 <body>
   <div class="banner"> 
@@ -13,10 +13,10 @@
       <h1>Wealth Care</h1>
 
       <ul>
-        <li><a href="#" class="link active" id="home_link">Home</a></li>
+        <li><a href="#" class="link active" >Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
-        <li><a href="#" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("contact_us") }}" class="link">Contact us</a></li>
         <li><a href="{{ url_for("logout") }}"" class="button" id="logoutbutton">Logout</a></li>
 
       </ul>
@@ -54,7 +54,7 @@
   </div> 
 
   <script src="static/home.js"></script>
-  <script src="static/searchvalidation.js"></script>
+
 
 </body>
 </html>

@@ -1,3 +1,6 @@
+
+
+//______________**validation**________________
 function validateForm(event) {
   event.preventDefault(); //prevent form auto submission before validation
  
@@ -29,5 +32,6 @@ function validateForm(event) {
 // _______submit button __________
 const form = document.getElementById("form");  
 form.addEventListener("submit", validateForm);
+
 
 

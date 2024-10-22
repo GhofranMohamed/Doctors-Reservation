@@ -1,9 +1,5 @@
 appointment_id,user_id,doctor_id,doctor_name,date,slot,phone_number
 4,12,10,Dawn Powell,2024-10-29,18:30,5468123
-5,1,5,Amber Jackson,2024-10-26,05:50,659851
-6,1,7,Brandi Clark,2024-10-25,02:30,123465897
-7,1,2,Mrs. Melissa Harris,2024-10-26,06:20,123465897
-7,1,4,Austin Decker,2024-10-15,05:05,10246698
 8,13,3,Patricia Hull,2024-10-14,06:50,0123658
 9,2,5,Amber Jackson,2024-10-29,06:05,5468123
 10,2,2,Mrs. Melissa Harris,2024-10-30,06:05,6555532
@@ -14,20 +10,14 @@ appointment_id,user_id,doctor_id,doctor_name,date,slot,phone_number
 15,2,9,Sean Jacobs,2024-10-31,05:05,95126
 16,2,9,Sean Jacobs,2024-10-18,06:06,1023698
 17,2,1,Ashley Juarez,2024-10-24,06:09,586520
-18,2,5,Amber Jackson,,,01236558
-19,2,1,Ashley Juarez,,,
-20,2,10,Dawn Powell,,,
 21,13,10,Dawn Powell,2024-10-24,10:02,985210
-22,1,1,Ashley Juarez,2024-10-17,05:05,012556478
-21,1,4,Austin Decker,2024-10-17,05:05,655
-22,1,2,Mrs. Melissa Harris,2024-10-17,11:00,0132456987
-23,1,4,Austin Decker,2024-10-18,11:00,659851
-24,1,2,Mrs. Melissa Harris,2024-10-18,11:00,659851
-25,1,1,Ashley Juarez,2024-10-17,09:00,123465897
 26,2,4,Austin Decker,2024-10-18,09:00,123465897
-27,1,5,Amber Jackson,2024-10-17,14:00,012556478
 29,14,5,Amber Jackson,2024-10-18,09:00,123465897
-29,20,1,Ashley Juarez,2024-10-19,10:00,dgdd
 30,20,2,Mrs. Melissa Harris,2024-10-17,09:00,dfss
 31,20,4,Austin Decker,2024-10-17,09:00,012345678932
-33,20,1,Ashley Juarez,2024-10-22,12:00,01234567899
+23,20,2,Mrs. Melissa Harris,2024-10-22,14:00,01234567899
+18,1,2,Mrs. Melissa Harris,2024-10-23,09:00,01234567899
+19,1,5,Amber Jackson,2024-10-22,14:00,01234567899
+20,1,4,Austin Decker,2024-10-22,14:00,01234567899
+22,1,1,Ashley Juarez,2024-10-31,12:00,01234567899
+22,1,5,Amber Jackson,2024-10-29,11:00,01234567899

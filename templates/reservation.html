@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/style.css">
-  <title>Welcome</title>
+  <title>Book an appointment</title>
 </head>
 <body>
   <div class="banner"> 
@@ -16,7 +16,8 @@
         <li><a href="{{ url_for("back_home") }}" class="link" id="home_link">Home</a></li>
         <li><a href="{{ url_for("doctors_page") }}" class="link">Doctors</a></li>
         <li><a href="{{ url_for("my_appointments") }}" class="link">My appoitments</a></li>
-        <li><a href="#" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("contact_us") }}" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("logout") }}"" class="button" id="logoutbutton">Logout</a></li>
 
       </ul>
     </div>
@@ -34,49 +35,33 @@
       <!------------------- registration form -------------------------->
       <div class="register-container" >
           <div class="top">
-              
               <header>Book your appointment</header>
           </div>
           <form action="{{ url_for("reservation_form") }}" method="post" id="form">
             
             <div class="input-box">
-              <input hidden type="number" class="input-field" placeholder="Doctor Id" name="doctor_id" value="{{ doctor['doctor_id'] }}">
-              <input hidden type="n" class="input-field" placeholder="Doctor Id" id="available_slots" value="{{ available_slots }}">
-              <input hidden type="" class="input-field" placeholder="Doctor Id" id ="appointments" value="{{ appointments }}">
+              <input hidden type=""  id="doctor_id" value="{{ doctor_id }}" name="doctor_id">
+              <input hidden type=""  id="available_slots" value="{{ available_slots }}">
+              <input hidden type=""  id ="appointments" value="{{ appointments }}">
               
               <i class="bx bx-lock-alt"></i>
-          </div>
+            </div>
             <div class="input-box">
               <input type="phone" class="input-field" placeholder="Phone Number" name="phonenumber" id="phone_number">
               <span id="phonenumber-error" class="error-message"></span>
               <i class="bx bx-lock-alt"></i>
           </div>
           <div class="input-box">
-            <input type="date" id="appointment-date" class="input-field" name="date" required >
+            <input type="date" id="appointment-date" class="input-field" name="date" min="" required >
           </div>
           <div class="input-box">
             <select name="slot" id="slot" class="input-field" name="slot" required >
               <option value="">Select a slot</option>
             </select>
           </div>
-          
-         
-        
-      
-
-          <!-- <div class="input-box">
-            <select name="slot" id="slot" class="input-field" required>
-              <option value="" class="options">Select a slot</option>
-              {% for slot in doctor['slot'] %}
-                <option value="{{ slot }}" class="options">{{ slot }}</option>
-              {% endfor %}
-            </select>
-            <i class="bx bx-lock-alt"></i>
-        </div> -->
-          </div>
-            <div class="input-box">
+          <div class="input-box">
                 <input type="submit" class="submit" value="Book">
-            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -84,9 +69,10 @@
   
 
 
-  <script src="static/script.js"></script>
-  <script src="static/reservevalidation.js"></script>
+  <script src="static/logout.js"></script>
+  <script src="static/validation.js"></script>
   <script src="static/availability.js"></script>
+  
 
 </body>
 </html>
