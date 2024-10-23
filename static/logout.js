@@ -1,16 +1,16 @@
-
-
+//________return isloggedout key and user name from local storage______________
 const isLoggedOut = localStorage.getItem("is_logged_out")
+const user_name = localStorage.getItem("name");
 
-if (!isLoggedOut ) {
- 
+if (!isLoggedOut) {
+//___________display welcome back again if user is still logged in______-
   const home_link = document.getElementById("home_link");
-  const user_name = localStorage.getItem("name");
   
   let baseurl = home_link.getAttribute("href")
   home_link.setAttribute("href" , baseurl + "?user_name=" + encodeURIComponent(user_name));
   
 } else {
+//________redirect to index page if user is logged out __________  
   localStorage.removeItem("is_logged_out") ;
   window.location = "http://"+ window.location.host ;
 }

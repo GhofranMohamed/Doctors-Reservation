@@ -16,8 +16,9 @@ appointment_id,user_id,doctor_id,doctor_name,date,slot,phone_number
 30,20,2,Mrs. Melissa Harris,2024-10-17,09:00,dfss
 31,20,4,Austin Decker,2024-10-17,09:00,012345678932
 23,20,2,Mrs. Melissa Harris,2024-10-22,14:00,01234567899
-18,1,2,Mrs. Melissa Harris,2024-10-23,09:00,01234567899
-19,1,5,Amber Jackson,2024-10-22,14:00,01234567899
 20,1,4,Austin Decker,2024-10-22,14:00,01234567899
 22,1,1,Ashley Juarez,2024-10-31,12:00,01234567899
 22,1,5,Amber Jackson,2024-10-29,11:00,01234567899
+21,1,1,Ashley Juarez,2024-10-24,12:00,01234567899
+22,1,9,Sean Jacobs,2024-10-31,12:00,01064415889
+23,1,2,Mrs. Melissa Harris,2024-11-03,14:00,01234567899

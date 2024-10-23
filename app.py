@@ -9,7 +9,9 @@ import json
 
 app = flask.Flask("app.py")
 app.secret_key = "secretkey"
+
 User.initialize_csv()
+Appointment.initialize_csv()
 
 #______routes________
 
@@ -26,13 +28,9 @@ def home_page():
 def back_home():
   if request.method == "GET":
     user_name = request.args.get("user_name")
-    print(user_name)
-    if user_name != "null" :
-      flash ("Welcome back " + user_name , "success")
-      return render_template("home.html")
-    else :
-      flash ("You must log in first", "error")
-      return redirect(url_for("signin_page")) 
+    flash ("Welcome back " + user_name , "success")
+    return render_template("home.html")
+     
 
 @app.route("/signin") 
 def signin_page():
@@ -54,13 +52,14 @@ def reservation_page():
     appointments = Appointment.get_doctor_appointments(doctor_id)
     appointments = json.dumps(appointments)
   
-    return render_template("reservation.html" , doctor_id = doctor_id,  appointments = appointments , available_slots = available_slots)
+    return render_template("reservation.html" , doctor = doctor ,  appointments = appointments , available_slots = available_slots)
 
 @app.route("/edit") 
 def edit_page():
   if request.method == "GET" :
     #json.dump convert to json string
     doctor_id = request.args.get("doctor_id")
+    appointment_id = request.args.get("appointment_id")
     doctor = Doctor.get_doctor_by_id(doctor_id)
 
     available_slots = json.dumps(doctor["available_slots"])
@@ -68,7 +67,7 @@ def edit_page():
     appointments = Appointment.get_doctor_appointments(doctor_id)
     appointments = json.dumps(appointments)
 
-  return render_template("edit.html", appointments = appointments , available_slots = available_slots)
+  return render_template("edit.html", appointment_id = appointment_id , doctor = doctor, appointments = appointments , available_slots = available_slots)
 
 @app.route("/doctors") 
 def doctors_page():
@@ -81,9 +80,13 @@ def logout():
   flash("You are succuessfully loged out " , "success")
   return redirect(url_for("welcome_page"))
 
-@app.route("/contact_us")
+@app.route("/contactus")
 def contact_us():
   return render_template("contact.html")
+
+@app.route("/contact_us")
+def contact_guest():
+  return render_template("contactguest.html")
  
 @app.route("/newuser" , methods=["POST"])
 def newuser():
@@ -117,13 +120,10 @@ def login():
 
     if check == 1 :
       user = User.login(email, password)
-      
-      if user :
-        session["user_id"] = user.user_id   #store name and ID to use later 
-        session["user_name"] = user.first_name
-        print(user)
-        flash("Welcome "+ user.first_name , category="success")
-        return redirect(url_for("home_page", user_name = user.first_name))
+      session["user_id"] = user.user_id   #store name and ID to use later 
+      session["user_name"] = user.first_name
+      flash("Welcome "+ user.first_name , category="success")
+      return redirect(url_for("home_page", user_name = user.first_name))
         
     elif check == 0 :
       flash("The password or email isn't correct", "error")
@@ -181,10 +181,14 @@ def delete_appointment():
 def edit_appointment():
   if request.method == "POST" :
     user_id = session.get("user_id")
+    print(user_id)
     appointment_id = request.form["appointment_id"]
+    print(appointment_id)
     doctor_id = request.form["doctor_id"]
+    print(doctor_id)
     new_date = request.form["date"]
     new_slot= request.form["slot"]
+
     
   Appointment.edit(appointment_id, user_id, doctor_id, new_date, new_slot)
   flash("Appointment edited succesfully", "success")

@@ -49,8 +49,8 @@
                   <td>{{ appointment['doctor_name'] }}</td>
                   <td>{{ appointment['date'] }}</td>
                   <td>{{ appointment['slot'] }}</td>
-                  <td><a href="{{ url_for('edit_page', appointment_id=appointment['appointment_id'] ,doctor_id=appointment['doctor_id']) }}" class="table_text">Edit</a></td>
-                  <td><a href="{{ url_for('delete_appointment', appointment_id=appointment['appointment_id'] , doctor_id=appointment['doctor_id']) }}" class="table_text">Remove</a></td>
+                  <td><a class="button" href="{{ url_for('edit_page', appointment_id=appointment['appointment_id'] ,doctor_id=appointment['doctor_id']) }}" class="table_text">Edit</a></td>
+                  <td><a class="button" href="{{ url_for('delete_appointment', appointment_id=appointment['appointment_id'] , doctor_id=appointment['doctor_id']) }}" class="table_text">Remove</a></td>
   
               </tr>
               {% endfor %}

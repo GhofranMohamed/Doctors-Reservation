@@ -1,8 +1,9 @@
 import csv 
+import os
 
 
 class Doctor:
-    csv_file = "static/data/doctor.csv"
+    csv_file = os.path.join(os.path.dirname(__file__), "static/data/doctor.csv")
     
     @classmethod
     def get_all_doctors(cls):

@@ -16,13 +16,7 @@ class User:
 
 #__________________functions_______________#  
 
-    def save(self):
-        self.initialize_csv()
-        with open(self.csv_file, mode="a", newline="") as file:
-            writer = csv.writer(file)
-            writer.writerow([self.user_id, self.first_name, self.last_name, self.email, self.password, self.phone_number, self.date_of_birth, self.gender])  
-
-
+#____________check if file exsit and create it if not____________-
     @classmethod
     def initialize_csv(cls):
         if not os.path.exists(cls.csv_file):
@@ -42,8 +36,8 @@ class User:
                                         self.date_of_birth,
                                             self.gender])
           
-
-    @classmethod  #think about this function
+#__________get user data after succusfuly login_________-
+    @classmethod  
     def login(cls, email, password):
         with open(cls.csv_file, mode="r") as file:
             csv_reader = csv.DictReader(file)
@@ -52,6 +46,7 @@ class User:
                     cleaned_row = {str(key): value for key, value in row.items()}
                     return cls(**cleaned_row)
         return None
+    
     @classmethod
     def user_validation (cls,  email , password) :
         with open(cls.csv_file, mode="r") as file:

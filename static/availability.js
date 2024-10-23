@@ -53,7 +53,7 @@ document.getElementById("appointment-date").addEventListener("change", function 
   if (filteredSlots.length === 0) {
     let option = document.createElement("option");
     option.value = "";
-    option.textContent = "No slots available";
+    option.textContent = "No slots available on this day";
     slotSelect.appendChild(option);
   } else {
 

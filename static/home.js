@@ -2,7 +2,7 @@
   const isLoggedOut = localStorage.getItem("is_logged_out")
   const userName = localStorage.getItem("name") ;
 
-  if (!isLoggedOut && userName != null) {
+  if (!isLoggedOut) {
   const queryString = window.location.search; /* getting url of the current page */
   const urlParams = new URLSearchParams(queryString); /* searching the param in the url of current page */ 
     

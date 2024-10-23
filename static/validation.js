@@ -1,5 +1,3 @@
-
-
 //______________**validation**________________
 function validateForm(event) {
   event.preventDefault(); //prevent form auto submission before validation

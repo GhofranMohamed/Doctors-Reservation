@@ -1,8 +1,8 @@
-const loginbutton = document.getElementById("login");
+const loginButton = document.getElementById("login");
 
-if (loginbutton) {
+if (loginButton) {
 
-  loginbutton.addEventListener("click" , () => localStorage.removeItem("is_logged_out"))
+  loginButton.addEventListener("click" , () => localStorage.removeItem("is_logged_out"))
 }
 
 function validateForm(event) {

@@ -14,7 +14,7 @@
 
       <ul>
     
-        <li><a href="{{ url_for("contact_us") }}" class="link">Contact us</a></li>
+        <li><a href="{{ url_for("contact_guest") }}" class="link">Contact us</a></li>
 
       </ul>
 
@@ -72,7 +72,9 @@
           <div class="two-forms">
 
             <div class="input-box">
+              <span>Date of birth</span>
               <input type="date" class="input-field" placeholder="Date of birth" name="date_of_birth" id="date_of_birth">
+          
               <span id="dob-error" class="error-message"></span>
               <i class="bx bx-lock-alt"></i> 
           </div>
